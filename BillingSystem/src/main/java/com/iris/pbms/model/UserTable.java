@@ -28,7 +28,7 @@ public class UserTable {
 
 
 
-	@Column(name="password")
+	@Column(name="PassD")
 
     private String password;
 

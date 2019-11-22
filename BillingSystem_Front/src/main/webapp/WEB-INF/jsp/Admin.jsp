@@ -16,12 +16,12 @@
 </div>
 <div class="dropdown" align="right">
 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
- Admin Options
+                   Admin Options
 </button>
 <div class="dropdown-menu">
 <a class="dropdown-item" href="configure">Configure Billing</a>
-<a class="dropdown-item" href="#">Allocate Project</a>
- <a class="dropdown-item" href="#">View Report</a>
+<a class="dropdown-item" href="AllocateProject">Allocate Project</a>
+ <a class="dropdown-item" href="ViewReport">View Report</a>
 </div>
   </div>
 </body>

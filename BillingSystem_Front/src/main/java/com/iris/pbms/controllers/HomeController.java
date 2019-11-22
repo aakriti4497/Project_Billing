@@ -1,5 +1,7 @@
 package com.iris.pbms.controllers;
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iris.pbms.daos.UserDao;
-import com.iris.pbms.model.User;
+
+import com.iris.pbms.model.UserTable;
+import com.iris.pbms.service.UserService;
 
 @Controller
 public class HomeController { 
@@ -27,14 +31,15 @@ public class HomeController {
    
    @Autowired
    HttpSession session;
+  
    @Autowired
-   UserDao userDao;
+   UserService userService;
    
    
    
-   @RequestMapping(value="OpenPage",method = RequestMethod.GET)
-   public String validateUser(@RequestParam int userid,@RequestParam String passd) {
-      User userObj=userDao.validateUser(userid,passd);
+   @RequestMapping(value="signIn",method = RequestMethod.POST)
+   public String validateUser(@RequestParam int userId,@RequestParam String password) {
+      UserTable userObj=userService.validateUser(userId,password);
       
       if(userObj==null) {
     	  
@@ -43,11 +48,11 @@ public class HomeController {
       else {
     	  String role=userObj.getRole();
     	  session.setAttribute("userObj", userObj);
-    	  if(role.equals("Admin")) {
-    		  return "AdminPage";
+    	  if(role.equals("admin")) {
+    		  return "Admin";
     	  }
     	  else 
-    		  return "DataEntryPage";
+    		  return "DataOperatorEntry";
       }
    }
 }
