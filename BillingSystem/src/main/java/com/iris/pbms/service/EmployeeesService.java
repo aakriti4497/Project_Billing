@@ -4,4 +4,7 @@ import com.iris.pbms.model.Employeees;
 public interface EmployeeesService {
 
 	public List<Employeees> getAllEmployeees();
+
+
+	public Employeees getEmployeeById(int employeeId);
 }

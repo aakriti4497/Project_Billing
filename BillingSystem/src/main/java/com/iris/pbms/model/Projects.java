@@ -9,144 +9,59 @@ import javax.persistence.Table;
 @Table(name="Projects")
 public class Projects {
 
-    @Id
+	@Id
     @Column(name="projectid")
-
     private int projectId;
-	@Column(name="projectname")
-
+	
+    @Column(name="projectname")
     private String projectName;
+    
     @Column(name="description")
-
     private String descprition;
     
     @Column(name="active")
-
     private String active;
 
-    public int getProjectId() {
-
-       return projectId;
-
-}
-public void setProjectId(int projectId) {
-
-   this.projectId = projectId;
-
-}
-
-
-  public String getProjectName() {
-
-return projectName;
+	public int getProjectId() {
+		return projectId;
 	}
-public void setProjectName(String projectName) {
 
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
 
-this.projectName = projectName;
+	public String getProjectName() {
+		return projectName;
+	}
 
-}
-
-
-
-
-
-
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
 	public String getDescprition() {
-
-
-
 		return descprition;
-
-
-
 	}
-
-
-
-
-
-
 
 	public void setDescprition(String descprition) {
-
-
-
 		this.descprition = descprition;
-
-
-
 	}
-
-
-
-
-
-
 
 	public String getActive() {
-
-
-
 		return active;
-
-
-
 	}
-
-
-
-
-
-
 
 	public void setActive(String active) {
-
-
-
 		this.active = active;
-
-
-
 	}
 
+   
 
-
-
-
-
-
-	@Override
-
-
-
-	public String toString() {
-
-
-
-		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", descprition=" + descprition
-
-
-
-				+ ", active=" + active + "]";
-
-
-
-	}
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
+	 @Override
+		public String toString() {
+			return "Projects [projectId=" + projectId + ", projectName=" + projectName + ", descprition=" + descprition
+					+ ", active=" + active + "]";
+		}
+  
 
 
 }

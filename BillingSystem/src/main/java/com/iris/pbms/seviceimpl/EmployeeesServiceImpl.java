@@ -20,6 +20,10 @@ public class EmployeeesServiceImpl implements EmployeeesService  {
 		return employeeesDao.getAllEmployeees();
 
 	}
+	public Employeees getEmployeeById(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

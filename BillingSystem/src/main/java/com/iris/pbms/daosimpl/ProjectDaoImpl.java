@@ -91,7 +91,7 @@ catch(Exception e)
       return false;
 }*/
 
-public boolean checkRoleConfig(RoleConfig obj) {
+public boolean checkRoleconfig(RoleConfig obj) {
         try {
 
            Session session=sessionFactory.getCurrentSession();
@@ -116,7 +116,122 @@ public boolean checkRoleConfig(RoleConfig obj) {
 		return false;
 
 	}
+/*
+public boolean setRoleconfig(RoleConfig obj) {
+	try {
+
+		   Session session=sessionFactory.getCurrentSession();
+
+		   Query q=session.createQuery("from com.iris.pbms.RoleConfig where projectid=:projectId and roleid=:roleId and location=:location");
+
+		   q.setParameter("projectId",obj.getProjectId());
+
+		   q.setParameter("roleId",obj.getRoleId());
+
+		   q.setParameter("location",obj.getLocation());
+
+		   if(q.list().size()==0) {
+
+		    session.save(obj);
+
+		    return true;
+
+		   }
+
+		   
+
+		  }
+
+		   catch(Exception e)
+
+		   {
+
+		    e.printStackTrace();
+
+		   }
+	return false;
+
+		  
+}*/
+
+public boolean setProjectEmpAllocation(ProjectEmpAllocation obj1) {
+    try {
+
+       Session session=sessionFactory.getCurrentSession();
+       Query q=session.createQuery("from com.iris.pbms.model.ProjectEmpAllocation where projectId=:projectId and roleId=:roleId and employeeId=:employeeId");
+
+		q.setParameter("projectId",obj1.getRoleConfig().getProjectId());
+		q.setParameter("roleId",obj1.getRoleConfig().getRoleId());
+        q.setParameter("employeeId",obj1.empObj().getEmployeeId());
+
+		if(q.list().size()==0) {
+            session.save(obj1);
+            return true;
+}
+
+		}
+        catch(Exception e)
+           {
+
+              e.printStackTrace();
+              	}
+
+	return false;
+
+}
+
+public List<RoleConfig> validateProject(int projectId, int roleId, String location) {
+
+	try {
+
+      Session session=sessionFactory.getCurrentSession();
+       Query q=session.createQuery("from com.iris.pbms.model.RoleConfig where proObj.projectId=:projectId and roleObj.roleId=:roleId and location=:location");
+          q.setParameter("projectId",projectId);
+          q.setParameter("roleId",roleId);
+          q.setParameter("location",location);
+         return q.list();
+
+}
+
+      catch(Exception e)
+{
+
+    e.printStackTrace();
+
+}
+return null;
+}
 
 
+           public List<RoleConfig> getAllRoleConfig(int projectId) {
+          try {
+            Session session=sessionFactory.getCurrentSession();
+           Query q=session.createQuery("from com.iris.pbms.model.RoleConfig where proObj.projectId=:projectId");
+            q.setParameter("projectId",projectId);
+           return q.list();
+          }
+            catch(Exception e)
+{
 
+            e.printStackTrace();
+	}
+
+         return null;
+}
+           public List<RoleConfig> getAllProjectConfigNotAllocated() {
+          try {
+
+                 Session session=sessionFactory.getCurrentSession(); 
+               	Query q=session.createQuery("from RoleConfig where configId not in(select pcObj.configId from ProjectEmpAllocation)");
+                     return q.list();
+                     }
+                catch(Exception e)
+	{
+               	e.printStackTrace();
+}
+              return null;
+  	}
+		
+		
+           
 }
