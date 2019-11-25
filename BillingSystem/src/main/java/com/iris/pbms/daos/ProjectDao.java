@@ -26,6 +26,8 @@ public List<Projects> getAllProjects();
 
 	public List<RoleConfig> getAllProjectConfigNotAllocated();
 
+	public List<ProjectEmpAllocation> getProjectEmpAllocation();
+
 
 
 	

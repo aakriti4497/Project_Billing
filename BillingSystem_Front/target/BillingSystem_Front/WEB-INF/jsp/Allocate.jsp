@@ -32,7 +32,7 @@
 	<label>Location:</label>
 	<div>
 		<div class="custom-control custom-radio">	
- 		<input type="radio" name="location" value="Onsite" checked> Onsite<br>
+ 		<input type="radio" name="location" value="Onsite"> Onsite<br>
  		<input type="radio" name="location" value="Offshore"> Offshore<br>
 		</div>  
 <label>Employee:</label>

@@ -39,9 +39,9 @@ public class ProjectDaoImpl implements ProjectDao{
         return null;
         }
           }
-catch(Exception e)
-{
-e.printStackTrace();
+   catch(Exception e)
+  {
+   e.printStackTrace();
 }
 return null;
 
@@ -95,13 +95,18 @@ public boolean checkRoleconfig(RoleConfig obj) {
         try {
 
            Session session=sessionFactory.getCurrentSession();
-           Query q=session.createQuery("from com.iris.pbms.model.RoleConfig where projectId=:projectId and roleId=:roleId and location=:location");
+           Query q=session.createQuery("from com.iris.pbms.model.RoleConfig"
+           		+ " where projectid=:projectId and roleid=:roleId and location=:location");
 
-			q.setParameter("projectId",obj.getProObj());
-			q.setParameter("roleId",obj.getRoleObj());
+			q.setParameter("projectId",obj.getProjectId());
+			q.setParameter("roleId",obj.getRoleId());
             q.setParameter("location",obj.getLocation());
 
-			if(q.list().size()==0) {
+            List list=q.list();
+            
+            System.out.println("List of Role Config : "+list);
+            
+			if(list.size()==0) {
                 session.save(obj);
                 return true;
 	}
@@ -154,42 +159,85 @@ public boolean setRoleconfig(RoleConfig obj) {
 		  
 }*/
 
-public boolean setProjectEmpAllocation(ProjectEmpAllocation obj1) {
-    try {
+    public boolean setProjectEmpAllocation(ProjectEmpAllocation obj1) {
+    	System.out.println("ProjectEmpAllocation "+obj1);
+    	try {
 
-       Session session=sessionFactory.getCurrentSession();
-       Query q=session.createQuery("from com.iris.pbms.model.ProjectEmpAllocation where projectId=:projectId and roleId=:roleId and employeeId=:employeeId");
 
-		q.setParameter("projectId",obj1.getRoleConfig().getProjectId());
-		q.setParameter("roleId",obj1.getRoleConfig().getRoleId());
-        q.setParameter("employeeId",obj1.empObj().getEmployeeId());
 
-		if(q.list().size()==0) {
-            session.save(obj1);
-            return true;
-}
+    		Session session=sessionFactory.getCurrentSession();
 
-		}
+    		Query q=session.createQuery("from com.iris.pbms.model.ProjectEmpAllocation where employeeId=:employeeId and configId=:configId");
+
+    		q.setParameter("employeeId",obj1.empObj().getEmployeeId());
+
+    		q.setParameter("configId",obj1.getRoleConfig().getConfigId());
+
+    		if(q.list().size()==0) {
+
+    			session.save(obj1);
+
+    			return true;
+
+    		}
+
+    		}
+		
         catch(Exception e)
            {
 
               e.printStackTrace();
               	}
+    	
+    	return false;
 
-	return false;
 
+
+	}
+
+
+    public List<ProjectEmpAllocation> getProjectEmpAllocation() {
+
+    	try {
+            Session session=sessionFactory.getCurrentSession();
+
+			Query q=session.createQuery("from com.iris.pbms.model.ProjectEmpAllocation");
+
+			
+
+			List list=q.list();
+
+			return list;
 }
+
+
+	catch(Exception e)
+
+{
+
+        e.printStackTrace();
+		}
+    	return null;
+
+
+    }
+
 
 public List<RoleConfig> validateProject(int projectId, int roleId, String location) {
 
 	try {
 
       Session session=sessionFactory.getCurrentSession();
+      System.out.println("Invalid");
        Query q=session.createQuery("from com.iris.pbms.model.RoleConfig where proObj.projectId=:projectId and roleObj.roleId=:roleId and location=:location");
           q.setParameter("projectId",projectId);
           q.setParameter("roleId",roleId);
           q.setParameter("location",location);
+          System.out.println("Invalid2");
+          System.out.println(q.list());
          return q.list();
+         
+         
 
 }
 
@@ -233,5 +281,8 @@ return null;
   	}
 		
 		
+	
+		}	
+	
+		
            
-}

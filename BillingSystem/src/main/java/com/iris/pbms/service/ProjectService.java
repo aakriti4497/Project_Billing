@@ -12,15 +12,17 @@ public interface ProjectService {
 
 	public Projects getProjectById(int projectId);
 
-	public List<RoleConfig> getAllRoleConfig();
+	public List<RoleConfig> getAllRoleConfig(int projectId);
 
 	public boolean setRoleConfig(RoleConfig obj);
 
+
 	public List<RoleConfig> getAllProjectConfigNotAllocated();
 
-    public List<RoleConfig> validateProjects(int projectId, int roleId, String location);
+    public List<RoleConfig> validateProject(int projectId, int roleId, String location);
 
 	public boolean setProjectEmpAllocation(ProjectEmpAllocation ab);
+	public List<ProjectEmpAllocation> getProjectEmpAllocation();
 
 	
 	

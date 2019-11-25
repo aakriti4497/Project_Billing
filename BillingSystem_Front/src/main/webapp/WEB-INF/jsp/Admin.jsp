@@ -15,6 +15,8 @@
 <h1 style="background-color:green;color:blue">Welcome Admin! </h1><hr/>
 </div>
 <div class="dropdown" align="right">
+<form action="${pageContext.request.contextPath}/logout" method="post">
+    <input type="submit" value="Logout" />
 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                    Admin Options
 </button>

@@ -41,48 +41,93 @@ public class RoleConfig {
 	
 	private int projectId;
 	private int roleId;
+
+
+
 	public int getConfigId() {
 		return configId;
 	}
+
+
+
 	public void setConfigId(int configId) {
 		this.configId = configId;
 	}
+
+
+
 	public int getPerHourBill() {
 		return perHourBill;
 	}
+
+
+
 	public void setPerHourBill(int perHourBill) {
 		this.perHourBill = perHourBill;
 	}
+
+
+
 	public String getLocation() {
 		return location;
 	}
+
+
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+
+
 	public Projects getProObj() {
 		return proObj;
 	}
+
+
+
 	public void setProObj(Projects proObj) {
 		this.proObj = proObj;
 	}
+
+
+
 	public EmployeeRole getRoleObj() {
 		return roleObj;
 	}
+
+
+
 	public void setRoleObj(EmployeeRole roleObj) {
 		this.roleObj = roleObj;
 	}
+
+
+
 	public int getProjectId() {
 		return projectId;
 	}
+
+
+
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
 	}
+
+
+
 	public int getRoleId() {
 		return roleId;
 	}
+
+
+
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "RoleConfig [configId=" + configId + ", perHourBill=" + perHourBill + ", location=" + location
@@ -93,6 +138,5 @@ public class RoleConfig {
 
 
 	
-
 
 }

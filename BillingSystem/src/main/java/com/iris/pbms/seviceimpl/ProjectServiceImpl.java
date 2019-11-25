@@ -1,7 +1,7 @@
 package com.iris.pbms.seviceimpl;
-
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,25 +21,22 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	ProjectDao projectdaoObj;
 	
+	private SessionFactory sessionFactory;
+	
 	public List<Projects> getAllProjects(){
 	return projectdaoObj.getAllProjects();
 	
-	
-	
-}
-    public List<RoleConfig> getRoleConfig() {
+	}
+    public List<RoleConfig> getAllRoleConfig(int projectId) {
     	return projectdaoObj.getAllRoleConfig();
     }
-	public List<RoleConfig> getAllRoleConfig() {
-		
-		return projectdaoObj.getAllRoleConfig();
-	}
+
 	public boolean setRoleConfig(RoleConfig pObj) {
 		
 		return projectdaoObj.checkRoleconfig(pObj);
 	}
-}
-	/*
+
+	
 	public List<RoleConfig> validateProject(int projectId, int roleId, String location) {
 		
 		return projectdaoObj.validateProject(projectId, roleId, location);
@@ -52,15 +49,22 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return projectdaoObj.getProjectById(projectId);
 	}
-	public List<RoleConfig> getAllRoleConfigNotAllocated() {
+/*	public List<RoleConfig> getAllRoleConfigNotAllocated() {
 	
 		return projectdaoObj.getAllProjectConfigNotAllocated();	
 		}
+		*/
 	public List<RoleConfig> getAllProjectConfigNotAllocated() {
-		// TODO Auto-generated method stub
-		return null;
+		return projectdaoObj.getAllProjectConfigNotAllocated();	
 	}
+	public List<ProjectEmpAllocation> getProjectEmpAllocation() {
+		// TODO Auto-generated method stub
+		return projectdaoObj.getProjectEmpAllocation();
+	}
+	
+	
+	
 
 	}
-*/
+
     

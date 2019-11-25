@@ -21,8 +21,7 @@ public class EmployeeesServiceImpl implements EmployeeesService  {
 
 	}
 	public Employeees getEmployeeById(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeesDao.getEmployeeById(employeeId);
 	}
 	
 

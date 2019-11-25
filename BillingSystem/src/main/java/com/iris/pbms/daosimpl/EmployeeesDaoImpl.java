@@ -41,6 +41,26 @@ public class EmployeeesDaoImpl implements EmployeeesDao{
       return null;
 
 	}
+
+	public Employeees getEmployeeById(int employeeId) {
+		
+		try {
+
+           Session session=sessionFactory.getCurrentSession();
+
+           Employeees d=session.get(Employeees.class,employeeId);
+           return d;
+
+}
+          catch(Exception e)
+	{
+             e.printStackTrace();
+
+
+
+		}
+		return null;
+	}
 }
 
 

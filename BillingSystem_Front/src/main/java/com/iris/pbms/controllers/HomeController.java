@@ -2,6 +2,12 @@ package com.iris.pbms.controllers;
 
 
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +16,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.iris.pbms.daos.UserDao;
 
 import com.iris.pbms.model.UserTable;
 import com.iris.pbms.service.UserService;
@@ -54,6 +58,15 @@ public class HomeController {
     	  else 
     		  return "DataOperatorEntry";
       }
-   }
+      /*
+      @WebServlet("/logout")
+      public class LogoutServlet extends HttpServlet {
+
+          protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+              request.getSession().invalidate();
+              response.sendRedirect(request.getContextPath() + "/LoginPage.html"); */
+          }
+
 }
+
    

@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ import com.iris.pbms.service.UserService;
 public class AdminController {
 	
 	@Autowired
+
+    HttpSession session;
+	
+	@Autowired
 	ProjectService projectserviceObj;
 
 	@Autowired
@@ -35,6 +40,20 @@ public class AdminController {
 	
 	@Autowired
 	EmployeeesService employeeeserviceObj;
+	
+
+
+	public boolean checkSession(ModelMap map) {
+        if(session.getAttribute("uObj")==null) {
+
+			map.addAttribute("msg","Session does not exist");
+
+			return true;
+
+		}
+
+		return false;
+	}
 
 	 @RequestMapping(value="/configure",method=RequestMethod.GET)
 	 public ModelAndView getAllconfig() throws Exception{
@@ -57,7 +76,7 @@ public class AdminController {
 		 public ModelAndView submitConfig(@ModelAttribute(name="pObj") @Valid RoleConfig pObj,BindingResult result,ModelMap map) {
 
 				try {
-					System.out.println(pObj);
+					System.out.println("In Role Config submit: "+pObj);
 
 					boolean saved = projectserviceObj.setRoleConfig(pObj);
 
@@ -69,7 +88,7 @@ public class AdminController {
 
 					if(saved) {
 
-						ModelAndView mv=new ModelAndView("redirect:http://localhost:1234/ProjectBilling/Config");
+						ModelAndView mv=new ModelAndView("message");
 
 						mv.addObject("msg","Configuration Added Succesfully..");
 
@@ -79,9 +98,9 @@ public class AdminController {
 
 					} else {
 
-						ModelAndView mv=new ModelAndView("redirect:http://localhost:1234/ProjectBilling/Config");
+						ModelAndView mv=new ModelAndView("message");
 
-						mv.addObject("errorMsg","noooo");
+						mv.addObject("msg","Configuration not Added Succesfully..");
 
 						System.out.println("return to page and not added added successfully");
 
@@ -171,12 +190,11 @@ public class AdminController {
 		}
 		 
 		 @RequestMapping(value="/submitallocate",method=RequestMethod.GET)
-
          public String validateConfigure(@RequestParam int projectId,@RequestParam int roleId,@RequestParam String location,@RequestParam int employeeId,ModelMap map){
-         System.out.println(projectId+""+roleId+""+location+""+employeeId);
+         System.out.println("Project Id = "+projectId+" Role Id= "+roleId+" Location = "+location+" EmployeeId= "+employeeId);
 
 				
-
+/*
 				List<Projects> plist=projectserviceObj.getAllProjects();
 
 				List<EmployeeRole> rlist=roleserviceObj.getAllRoles();
@@ -188,46 +206,40 @@ public class AdminController {
 				map.addAttribute("roleList",rlist);
 
 				map.addAttribute("empList",elist);
+				*/
+				
+		 
+		 List<RoleConfig> Obj=projectserviceObj.validateProject(projectId,roleId,location);
+		 System.out.println(Obj);
+		 RoleConfig configObj=Obj.get(0);
+         Employeees pObj=employeeeserviceObj.getEmployeeById(employeeId);
+         System.out.println("Employee Obj : "+pObj);
+		 
+		  ProjectEmpAllocation ab=new ProjectEmpAllocation();
 
+           ab.setempObj(pObj);
+           ab.setRoleConfig(configObj);
 
-
-	       List<RoleConfig> Obj=projectserviceObj.validateProjects(projectId,roleId,location);
-	       System.out.println("OBJ = "+Obj);
-	       
-           RoleConfig configObj=Obj.get(0);
-
-           Employeees empObj=employeeeserviceObj.getEmployeeById(employeeId);
-
-           ProjectEmpAllocation ab=new ProjectEmpAllocation();
-
-
-            ab.setempObj(empObj);
-
-            ab.setRoleConfig(configObj);
-
-
-
-			boolean saved=projectserviceObj.setProjectEmpAllocation(ab);
-
-			if(saved) {
+           boolean saved=projectserviceObj.setProjectEmpAllocation(ab);
+              if(saved) {
 
 				map.addAttribute("msg","Allocation done");
 
-				return "allocate";
+				return "Allocate";
 
-				
-
-			}
+				}
 
 			else {
 
 				map.addAttribute("msg","Allocation error");
 
-			return "allocate";
+			    return "Allocate";
 
 			}
 
+         }
+
 	}
 
-		}
+
 

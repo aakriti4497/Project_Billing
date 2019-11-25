@@ -18,6 +18,8 @@ public interface EmployeeesDao {
 
 	public List<Employeees> getAllEmployeees();
 
+	public Employeees getEmployeeById(int employeeId);
+
 
 
 }

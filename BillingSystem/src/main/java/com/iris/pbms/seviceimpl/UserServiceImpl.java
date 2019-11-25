@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iris.pbms.daos.UserDao;
+import com.iris.pbms.model.EmpAttendance;
 import com.iris.pbms.model.UserTable;
 import com.iris.pbms.service.UserService;
 
@@ -27,4 +28,7 @@ public class UserServiceImpl implements UserService {
 
 		return userDaoObj.getUserById(userid);
    }
+	public boolean setAttendance(EmpAttendance peaObj) {
+		return setAttendance(peaObj);
+	}
 }
