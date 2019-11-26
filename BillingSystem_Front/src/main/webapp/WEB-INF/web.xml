@@ -13,10 +13,21 @@
       </servlet-class>
       <load-on-startup>1</load-on-startup>
    </servlet>
+   <servlet>
+   	<description>
+   	</description>
+   	<display-name>LogOut</display-name>
+   	<servlet-name>LogOut</servlet-name>
+   	<servlet-class>com.iris.pbms.servlet.LogOut</servlet-class>
+   </servlet>
 
    <servlet-mapping>
       <servlet-name>HelloWeb</servlet-name>
       <url-pattern>/</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+   	<servlet-name>LogOut</servlet-name>
+   	<url-pattern>/LogOut</url-pattern>
    </servlet-mapping>
 
 </web-app>

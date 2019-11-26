@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"\
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
@@ -11,13 +11,14 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 </head>
 <body>
 <div align="center">
-<f:form action="submitData" modelAttribute="deoObj" method="get">
+    <h1 style="text-align: center;font-family: verdana;color:green">Mark Attendance ! </h1>
+<f:form action="submitData" modelAttribute="peaObj" method="get">
 <div>
 <label>Project :</label>
 
- <f:select path="projectId" id="project">
+ <f:select path="proObj.projectId" id="project">
           <f:option value="0">----Select Project--------</f:option>
-           <core:forEach items="${projList}" var="dOb">
+           <core:forEach items="${pList}" var="dOb">
               	<f:option value="${dOb.projectId}">${dOb.projectName}</f:option>
               	</core:forEach>
                   </f:select><br>
@@ -27,7 +28,7 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 
 		<label>Employees Under project :</label>
-        <f:select path="employeeId" id="employee" >
+        <f:select path="empObj.employeeId" id="employee" >
         <f:option value="0">----Select Employee--------</f:option>
         </f:select><br>
 
@@ -39,7 +40,7 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 		<div>
         <label>Month :</label>
 
-          <f:select path="month" cssClass="form-control" required="true">
+          <f:select path="mnth" cssClass="form-control" required="true">
 
 
 
@@ -57,12 +58,36 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
              <f:option value="november">November</f:option>
            	<f:option value="december">December</f:option>
 </f:select>
+<br>
+       </div>
+       <div>
+          <label>Year :</label>
+             <f:select path="yrs" id="yrs"  required="true">
+              <f:option value="">Select year</f:option>
+	</f:select>
+                 <script type="text/javascript">
+
+                   	for(y=2015;y<2021;y++){
+                     var optn = document.createElement("OPTION");
+                         optn.text=y;
+                         	optn.value=y;
+                       	if(y==2019){
+                          optn.selected=true;
+	}
+	document.getElementById('yrs').options.add(optn);
+
+	}
+
+</script>
+
+</div>
 
 <br>
 
 </div>
 	<br>
 	<div>
+	    
 <label>Half day:</label>
 	<f:input path="halfDay" size="30" cssClass="form-control" placeholder="Enter Number of Half Days" required="true"/><br>
 	</div>
@@ -74,13 +99,8 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 <div class="form-group">
 
-
-
-		    <button type="submit" class="btn btn-primary">Submit</button>
-
-
-
-		 </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+           </div>
 
 
 
@@ -118,17 +138,13 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 			        console.log(el.employeeId+" "+el.employeeName);
 
-			      
-
-			        
-
-			        var o = new Option(el.employeeName, el.employeeId);
+			       var o = new Option(el.employeeName, el.employeeId);
 
 		                 /// jquerify the DOM object 'o' so we can use the html method
 
 		                 $(o).html(el.employeeName);
 
-		                 $("#employeees").append(o)
+		                 $("#employee").append(o)
 
 			      });
 
@@ -146,9 +162,7 @@ pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
 			    }
 
-			   
-
-			  });
+			   });
 
 			
 

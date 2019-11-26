@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
+<%@ include file="Header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,12 +16,13 @@
 <h1 style="background-color:green;color:blue">Welcome Admin! </h1><hr/>
 </div>
 <div class="dropdown" align="right">
-<form action="${pageContext.request.contextPath}/logout" method="post">
-    <input type="submit" value="Logout" />
-<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                   Admin Options
-</button>
-<div class="dropdown-menu">
+
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+
+      Admin Options
+
+    </button>
+    <div class="dropdown-menu">
 <a class="dropdown-item" href="configure">Configure Billing</a>
 <a class="dropdown-item" href="allocate">Allocate Project</a>
  <a class="dropdown-item" href="ViewReport">View Report</a>

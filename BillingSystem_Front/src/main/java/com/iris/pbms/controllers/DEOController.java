@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iris.pbms.daos.ProjectDao;
+import com.iris.pbms.daos.UserDao;
 import com.iris.pbms.model.EmpAttendance;
 import com.iris.pbms.model.Employeees;
 import com.iris.pbms.model.ProjectEmpAllocation;
@@ -42,7 +44,7 @@ public class DEOController {
 	
 	public boolean checkSession(ModelMap map) {
 
-		if(session.getAttribute("uObj")==null) {
+		if(session.getAttribute("userObj")==null) {
            map.addAttribute("msg","Session does not exist");
               return true;
 
@@ -73,10 +75,19 @@ public class DEOController {
         mv.addObject("peaObj", peaObj);
         return mv;
 	}
+	 @Autowired
+
+	 ProjectDao projectDao;
+
+	 
+
+	 @Autowired
+
+	 UserDao userDao;
         
         @ResponseBody
         @RequestMapping(value="/getEmployeeesList",method=RequestMethod.GET)
-        public List<Employeees> getAllEmployees(@RequestParam("projectId") int projectId){
+        public List<Employeees> getAllEmployeees(@RequestParam("projectId") int projectId){
         System.out.println("Given project Id : "+projectId);
         List<Employeees> eList=new ArrayList();
         List<RoleConfig> configList=projectserviceObj.getAllRoleConfig(projectId);
@@ -97,7 +108,15 @@ public class DEOController {
 	}
         @RequestMapping(value="/submitData",method=RequestMethod.GET)
         public ModelAndView submitAttendance(@ModelAttribute(name="peaObj") EmpAttendance peaObj,@RequestParam int employeeId,@RequestParam int projectId,ModelMap map) throws Exception{ 
-        
+             
+        	if(checkSession(map)) {
+
+    			ModelAndView mv=new ModelAndView("Login");
+
+    			return mv;
+
+    		}
+        	
         	System.out.println(peaObj);
         	Employeees eObj=employeeeserviceObj.getEmployeeById(employeeId);
         	Projects proObj=projectserviceObj.getProjectById(projectId);

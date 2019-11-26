@@ -1,11 +1,15 @@
 package com.iris.pbms.seviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.iris.pbms.daos.ProjectDao;
 import com.iris.pbms.daos.UserDao;
 import com.iris.pbms.model.EmpAttendance;
+import com.iris.pbms.model.RoleConfig;
 import com.iris.pbms.model.UserTable;
 import com.iris.pbms.service.UserService;
 
@@ -16,6 +20,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
     UserDao userDaoObj;
+	
+	@Autowired
+	ProjectDao projectDaoObj;
+	
 	
 	
 	public UserTable validateUser(int userid, String password) {
@@ -30,5 +38,9 @@ public class UserServiceImpl implements UserService {
    }
 	public boolean setAttendance(EmpAttendance peaObj) {
 		return setAttendance(peaObj);
+	}
+	public List<RoleConfig> getAllRoleConfig() {
+		
+		return projectDaoObj.getAllRoleConfig();
 	}
 }
