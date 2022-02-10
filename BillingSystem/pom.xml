@@ -12,7 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-     <hibernateversion>5.1.5.Final</hibernateversion>
+     <hibernateversion>5.4.24.Final</hibernateversion>
   </properties>
 
   <dependencies>
